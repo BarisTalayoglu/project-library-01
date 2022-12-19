@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"/>
+  <title>Save Book</title>
+</head>
+
+<body>
+<div class="container">
+  <h1>Book Directory</h1>
+  <hr>
+  <p class="h4 mb-4">Save Book</p>
+  <form action="#" th:action="@{/books/save}"
+        th:object="${book}" method="POST">
+    <input type="hidden" th:field="*{id}"/>
+    Book Name
+    <input type="text" th:field="*{bookName}"
+           class="form-control mb-4 col-4" placeholder="Enter Book Name">
+    Availability
+    <select th:field="*{bookStatus}" class="form-control mb-4 col-4">
+      <option th:value="true" th:text="true"></option>
+      <option th:value="false" th:text="false"></option>
+    </select>
+    Book Type
+    <br>
+    <select th:field="*{bookType}" class="form-control mb-4 col-4">
+      <option th:value="'Comedy'" th:text="Comedy"></option>
+      <option th:value="'Drama'" th:text="Drama"></option>
+      <option th:value="'Adventure'" th:text="Adventure"></option>
+      <option th:value="'Children'" th:text="Children"></option>
+      <option th:value="'Crime'" th:text="Crime"></option>
+
+    </select>
+
+    <button type="submit" class="btn btn-info col-2">Save</button>
+
+  </form>
+  <hr>
+  <a th:href="@{/books/list}">Back to Book List</a>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"/>
+  <title>Order Book</title>
+</head>
+
+<body>
+<div class="container">
+  <h1>Book Directory</h1>
+  <hr>
+  <p class="h4 mb-4">Save Book</p>
+  <form action="#" th:action="@{/books/reciept}"
+        th:object="${book}" method="GET">
+
+    <p th:text="${date}">Test</p>
+
+    <input type="hidden" th:field="*{id}"/>
+    <input type="text" th:field="*{memberName}"
+           class="form-control mb-4 col-4" placeholder="Member Name">
+    <input type="text" th:field="*{bookName}"
+           class="form-control mb-4 col-4" placeholder="Ordered Book Name">
+    <input type="text" th:field="*{bookStatus}"
+           class="form-control mb-4 col-4" placeholder="Current Availability">
+    <input type="text" th:field="*{bookType}"
+           class="form-control mb-4 col-4" placeholder="Book Type">
+    <button type="submit" class="btn btn-info col-2">Create Reciept</button>
+
+  </form>
+  <hr>
+  <a th:href="@{/books/list}">Back to Book List</a>
+</div>
+
+
+</body>
+</html>

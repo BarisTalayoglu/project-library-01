@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"/>
+    <title>Reciept</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <address>
+                        <strong>BYRSH Library</strong>
+                        <br>
+                        Mielznskiego 19
+                        <br>
+                        Poznan, PL 61-725
+                        <br>
+                        <abbr title="Phone">P:</abbr> 792 668 xxx
+                    </address>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                    <p>
+                    <br>
+                    <p th:text="${date}">date</p>
+                    </p>
+                    <p>
+                        Reciept Id:
+                        <em th:text="${book.id}">Receipt</em>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="text-center">
+                    <h1>Receipt</h1>
+                </div>
+                </span>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Issued</th>
+                        <th>#</th>
+                        <th class="text-center">Book Name</th>
+                        <th class="text-center">Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="${book.memberName}">issued</td>
+                        <td>1</td>
+                        <td th:text="${book.bookName}">book name</td>
+                        <td th:text="${date}">current date</td>
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td class="text-right"><h4><strong>Return Date: </strong></h4></td>
+                        <td th:text="${futureDate}" class="text-center text-danger"><h4><strong>futureDate</strong></h4></td>
+
+                    </tr>
+                    </tbody>
+
+                </table>
+                <p class="text-center text-danger">5 zloty for each day exceeding the date</p>
+
+            </div>
+            <a th:href="@{/books/list}">Back to Book List</a>
+
+        </div>
+    </div>
+</body>
+</html>
