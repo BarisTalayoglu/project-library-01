@@ -1,0 +1,9 @@
+Create DB called library-project
+Don't forget to change application-properties datasource username and password
+
+CREATE TABLE `library-project`.`book` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `book_name` VARCHAR(45) NULL,
+  `book_status` boolean NULL default 1,
+  `book_type` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
