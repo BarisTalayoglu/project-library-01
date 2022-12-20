@@ -3,8 +3,6 @@ package com.baristalayoglu.projectlibrary.controller;
 import com.baristalayoglu.projectlibrary.dao.BookRepository;
 import com.baristalayoglu.projectlibrary.entity.Book;
 import com.baristalayoglu.projectlibrary.entity.Category;
-import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,14 +16,8 @@ public class BookController {
 
     private BookRepository bookRepository;
 
-
-
-    @Autowired
     public BookController(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
-    }
-
-    public BookController() {
     }
 
     @GetMapping("/list")
@@ -51,7 +43,7 @@ public class BookController {
     }
 
     @GetMapping("/showFormForUpdate")
-    public String showFormForUpdate(@RequestParam("id")int theId, Model theModel){
+    public String showFormForUpdate(@RequestParam("id") Long theId, Model theModel){
         Optional<Book> theBook = bookRepository.findById(theId);
         theModel.addAttribute("book",theBook);
 
@@ -59,13 +51,13 @@ public class BookController {
     }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam("id") int id){
+    public String delete(@RequestParam("id") Long id){
         bookRepository.deleteById(id);
         return "redirect:/books/list";
     }
 
     @GetMapping("/order")
-    public String orderBook(@RequestParam("id")int id, Model theModel){
+    public String orderBook(@RequestParam("id") Long id, Model theModel){
         Optional<Book> theBook = bookRepository.findById(id);
         theBook.get().setBookStatus(false);
         theModel.addAttribute("book",theBook);
@@ -90,11 +82,11 @@ public class BookController {
     public List<Category> getCategories(){
         List<Category> categoryList = new ArrayList<>();
         List<Book> bookList = bookRepository.findAll();
-        Category comedyCategory = new Category("Comedy");
-        Category dramaCategory = new Category("Drama");
-        Category adventureCategory = new Category("Adventure");
-        Category childrenCategory = new Category("Children");
-        Category crimeCategory = new Category("Crime");
+        Category comedyCategory = new Category(1L, "Comedy");
+        Category dramaCategory = new Category(2L, "Drama");
+        Category adventureCategory = new Category(3L, "Adventure");
+        Category childrenCategory = new Category(4L, "Children");
+        Category crimeCategory = new Category(5L, "Crime");
 
         for(Book book: bookList){
             if(book.getBookType().equals("Adventure")) {

@@ -4,88 +4,98 @@
     <title>Books Directory</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 <body>
-<div class="container">
-    <h3>Books Directory</h3>
-    <hr>
+    <div class="container">
+        <h3>Books Directory</h3>
+        <hr>
     <a th:href="@{/books/showFormForAdd}"
        class="btn btn-primary btn-sm mb-3">
-        Add Book
-    </a>
+            Add Book
+        </a>
 
-    <table class="table table-bordered table-striped">
-        <thead class="table-dark">
-        <tr>
-            <th>Book Name</th>
-            <th>Book Availability</th>
-            <th>Book Type</th>
-            <th>Member Who Ordered</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="tempBook : ${books}">
-            <td th:text="${tempBook.bookName}"/>
-            <td th:text="${tempBook.bookStatus}"/>
-            <td th:text="${tempBook.bookType}"/>
-            <td th:text="${tempBook.memberName}"/>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Book Name</th>
+                    <th>Book Availability</th>
+                    <th>Book Type</th>
+                    <th>Member Who Ordered</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="tempBook : ${books}">
+                    <td th:text="${tempBook.bookName}" />
+                    <td th:text="${tempBook.bookStatus}" />
+                    <td th:text="${tempBook.bookType}" />
+                    <td th:text="${tempBook.memberName}" />
 
-            <td>
+                    <td>
                 <a th:if="${tempBook.bookStatus == true}" th:href="@{/books/order(id=${tempBook.id})}"
                    class="btn btn-info btn-sm">
-                    Order
-                </a>
+                            Order
+                        </a>
 
                 <a th:href="@{/books/showFormForUpdate(id=${tempBook.id})}"
                    class="btn btn-info btn-sm">
-                    Update
-                </a>
+                            Update
+                        </a>
                 <a th:href="@{/books/delete(id=${tempBook.id})}"
                    class="btn btn-danger btn-sm">
-                    Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                            Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-    <table class="table table-bordered table-striped">
-        <thead class="table-dark">
-        <tr>
-            <th>Category Name</th>
-            <th>Books</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="category : ${categories}">
-            <td th:text="${category.categoryName}"/>
-            <td>
-                <select class="form-control" id="dropDownList">
-                    <option value="0">Select Book</option>
-                    <option th:each="iterBook : ${category.books}"
-                            th:value="${iterBook.bookName}" th:text="${iterBook.bookName}"></option>
-                    </option>
-                </select>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Category Name</th>
+                    <th>Books</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="category : ${categories}">
+                    <td th:text="${category.categoryName}" />
+                    <td>
+                        <select class="form-control" th:attr="onchange=|changeBook(event, '${category.id}')|">
+                            <option value="0" selected disabled>Select Book</option>
+                            <option th:each="iterBook : ${category.books}" th:value="${iterBook.id}"
+                                th:text="${iterBook.bookName}"></option>
+                            </option>
+                        </select>
 
-            </td>
+                    </td>
 
-            <td>
-                <a th:if="${iterBook.bookStatus == true}" th:href="@{/books/order(id=${iterBook.id})}"
-                   class="btn btn-info btn-sm">
-                    Order
-                </a>
-            </td>
+                    <td>
+                        <a th:id="'order-btn' + '-' + ${category.id}" class="btn btn-info btn-sm">
+                            Order
+                        </a>
+                    </td>
 
-        </tr>
-
+                </tr>
 
 
 
 
-        </tbody>
-    </table>
-</div>
+
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function changeBook(e, categoryId) {
+            selectedBookId =  $(e.target).find("option:selected").val()
+
+            $("#order-btn-" + categoryId).prop("href", "/books/order/" + selectedBookId)
+        }
+    </script>
+
 </body>
+
 </html>

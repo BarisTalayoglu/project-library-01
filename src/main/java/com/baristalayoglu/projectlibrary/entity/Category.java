@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Category {
+    private Long id;
     private String categoryName;
     private List<Book> books;
 
@@ -11,9 +12,18 @@ public class Category {
         books= new ArrayList<>();
     }
 
-    public Category(String categoryName) {
+    public Category(Long id, String categoryName) {
+        this.id = id;
         this.categoryName = categoryName;
         books = new ArrayList<>();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCategoryName() {
