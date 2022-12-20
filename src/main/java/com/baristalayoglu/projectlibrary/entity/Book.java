@@ -1,10 +1,6 @@
 package com.baristalayoglu.projectlibrary.entity;
 
-import jakarta.annotation.PostConstruct;
 import jakarta.persistence.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "book")
@@ -13,7 +9,7 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private int id;
+    private Long id;
     @Column(name="book_name")
     private String bookName;
     @Column(name="book_status")
@@ -35,11 +31,11 @@ public class Book {
 
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
